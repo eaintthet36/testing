@@ -1,0 +1,77 @@
+<header class=" bg-blue-200 font-bold flex justify-between py-3 px-4">
+    <div>
+        <h1 class="pr-10">Logo</h1>
+    </div>
+
+    <div class="flex items-center justify-center ">
+        <input type="text" [(ngModel)]="inputData" class="border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md py-1 px-1 w-40" placeholder="Search...">
+        <button (click)="addHandler()" class ="bg-blue-500 hover:bg-blue-700 text-black font-bold py-1 px-1 w-24 rounded-md ml-2" 
+        >Search</button>
+      </div>
+      
+      
+    <div class="text-lg">
+        <a routerLink="/">Home</a>
+        <a routerLink="/about" class="pl-10">About</a>
+    </div>
+</header>
+
+<div>
+    
+    <div class="container mx-auto p-4">
+        <div *ngIf="!showDetail; else elseBlock">
+            <div *ngFor="let category of categories; let i = index" class="mb-8">
+                <h1 class=" my-4 font-medium">{{category | uppercase}}</h1>
+                <div class="grid grid-cols-2  md:grid-cols-4 gap-4 ">
+                   <ng-template *ngFor="let product of products; let i = index" [ngIf]="product.category === category">
+                      <div  class="border-[1.8px] border-gray-200 flex flex-col p-3 rounded-lg cursor-pointer hover:border-green-300"  >
+                         <div class=" h-36 flex items-center mb-2">
+                            <img [src]="product.image" alt="" class="max-h-36 max-w-28 mx-auto">
+                         </div>
+                            <hr>
+                         <h1 class="mt-2 line-clamp-2">{{product.title}}</h1>
+                      </div>
+                   </ng-template>
+                </div>
+             </div>
+        </div>
+
+        <ng-template #elseBlock>
+            <div class="mb-8">
+                <ng-container *ngIf="detailDatas.length > 0; else noDataTemplate">
+                     <h1 class=" my-4 font-medium">{{detailTitle | uppercase}}</h1>
+                    <div class="grid grid-cols-2  md:grid-cols-4 gap-4 ">
+                        <ng-template *ngFor="let product of detailDatas; let i = index" [ngIf]="product.category === detailTitle">
+                            <div  class="border-[1.8px] border-gray-200 flex flex-col p-3 rounded-lg cursor-pointer hover:border-green-300"  >
+                                <div class=" h-36 flex items-center mb-2">
+                                    <img [src]="product.image" alt="" class="max-h-36 max-w-28 mx-auto">
+                                </div>
+                                <hr>
+                                <h1 class="mt-2 line-clamp-2">{{product.title}}</h1>
+                            </div>
+                        </ng-template>
+                    </div>
+                </ng-container>
+                <ng-template #noDataTemplate>
+                    <div class="text-red-500 flex justify-center">No data found</div>
+                  </ng-template>
+            </div>
+        </ng-template>
+     </div>
+</div>
+
+
+
+<!-- <router-outlet></router-outlet> -->
+
+<!-- <footer>
+    <div class="">
+        <h1>Products</h1>
+        <li>Shoes</li>
+        <li>Clothing</li>
+        <li>Accessories</li>
+        <li>Gift Cards</li>
+    </div>
+</footer>
+ -->
+

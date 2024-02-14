@@ -1,0 +1,7 @@
+<input type="text" [(ngModel)]="input" placeholder="Write your task!" style="margin:30px;  background-color: bisque;">
+<button (click)="addHandler()" [disabled]="!input" style="background-color: aquamarine; padding: 5px;">Add</button>
+<ul *ngFor="let list of lists; let i = index">
+    <li style="padding: 5px;"> {{list}}
+        <button style="margin-left: 100px;" (click)="rRemove(i)"> Remove </button>
+    </li>
+</ul>
